@@ -116,6 +116,13 @@
     name.textContent=profile.name; avatar.textContent=profile.initial;
   }
   function renderServers() {
+    Object.entries(communities).forEach(([id,community])=>{
+      if(document.querySelector('.server[data-server="'+id+'"]')) return;
+      const b=document.createElement('button'); b.className='server'; b.dataset.server=id;
+      b.title=community.name; b.setAttribute('aria-label',community.name);
+      b.textContent=community.name.charAt(0).toUpperCase();
+      $('add-server').before(b); b.addEventListener('click',()=>selectServer(id));
+    });
     document.querySelectorAll('.server[data-server]').forEach(b=>b.classList.toggle('active',b.dataset.server===server));
     $('workspace-name').textContent=communities[server].name;
   }
