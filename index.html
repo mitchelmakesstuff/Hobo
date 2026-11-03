@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0b10">
+<meta name="theme-color" content="#090A0E">
 <meta name="description" content="HOBO — Share moments. Start conversations. Find your people.">
 <title>HOBO — Your world, your people</title>
 <style>
@@ -30,6 +30,134 @@
 @media(max-width:1120px){.app{grid-template-columns:215px minmax(400px,660px)}.right{display:none}.center{border-right:0}.left{padding-left:17px;padding-right:15px}}
 @media(max-width:700px){.app{display:block;padding-bottom:66px}.left{display:none}.center{border:0;min-height:100dvh}.top{height:60px;padding:0 15px}.mobile-brand{display:flex;align-items:center;gap:8px}.mobile-brand .brand-mark{width:31px;height:31px;border-radius:10px;font-size:19px}.mobile-brand .brand-name{font-size:18px}.page-title{display:none}.top-actions{gap:7px}.icon-btn{width:35px;height:35px}.feed-tabs{padding:0 17px;height:48px;gap:25px}.stories{padding:15px 16px 14px;gap:14px}.story{width:54px}.story-ring{width:52px;height:52px}.composer-card{padding:14px 15px;gap:9px}.composer-card>.avatar{width:34px;height:34px}.composer-prompt{font-size:12px;min-height:37px}.tool-btn{padding:6px 5px;font-size:10px}.post-btn{padding:8px 13px}.post{padding:17px 15px 14px}.post-media{height:245px}.post-text{font-size:12px}.mobile-nav{position:fixed;z-index:15;bottom:0;left:0;right:0;height:calc(62px + env(safe-area-inset-bottom));padding:5px 10px env(safe-area-inset-bottom);background:#101017f5;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(18px)}.mobile-nav button{width:48px;height:48px;border:0;background:transparent;color:#8e8a9a;border-radius:13px;font-size:20px;display:grid;place-items:center;position:relative}.mobile-nav button.active{color:#d5c6ff;background:#a78bfa16}.mobile-nav .nav-create{background:var(--purple);color:#1c1528;width:42px;height:42px;font-size:24px;border-radius:14px}.toast{bottom:80px}.modal-backdrop{align-items:flex-end;padding:10px}.modal{border-radius:20px 20px 14px 14px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+
+/* HOBO visual system v2 — restrained palette, stable layout, floating glass dock */
+:root{
+ color-scheme:dark;
+ --bg:#090A0E;--panel:#111319;--panel2:#171A22;--panel3:#1E222C;
+ --line:#282D38;--text:#F4F3F8;--muted:#9296A3;--soft:#C9C9D2;
+ --purple:#A78BFA;--purple2:#A78BFA;--pink:#A78BFA;--green:#A78BFA;--danger:#A78BFA;
+ --radius:18px;--shadow:0 22px 70px #0009;
+ --dock-bg:rgba(23,25,33,.78);--dock-border:rgba(255,255,255,.12);
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% -25%,#191526 0%,var(--bg) 48%);padding-bottom:112px;overflow-x:hidden}
+button,input,textarea{font-family:inherit}
+button{ -webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.app{width:100%;max-width:1480px;min-height:100dvh;grid-template-columns:minmax(190px,240px) minmax(0,680px) minmax(220px,290px);justify-content:center;gap:0}
+.left{padding:28px 18px 24px 22px;border-color:var(--line)}
+.brand{margin-bottom:38px}
+.brand-mark,.mobile-brand .brand-mark{background:var(--purple);color:#171321;box-shadow:0 5px 22px #a78bfa2a;border-radius:13px}
+.brand-tag{color:var(--muted)}
+/* Desktop navigation is intentionally simplified; the floating dock is the primary nav. */
+.left .nav,.left .create-side{display:none}
+.left-bottom{margin-top:auto}
+.mini-profile{background:rgba(255,255,255,.035);border-color:var(--line);border-radius:16px}
+.center{width:100%;min-width:0;max-width:680px;border-left:1px solid var(--line);border-right:1px solid var(--line);background:rgba(12,13,18,.62)}
+.top{height:72px;padding:0 25px;background:rgba(9,10,14,.78);border-color:var(--line);backdrop-filter:blur(24px) saturate(145%);-webkit-backdrop-filter:blur(24px) saturate(145%)}
+.page-title{font-size:18px;letter-spacing:-.55px}
+.icon-btn{background:var(--panel);border-color:var(--line);border-radius:13px;color:var(--soft);transition:background .18s,border-color .18s,transform .18s}
+.icon-btn:hover{background:var(--panel2);border-color:#414653;transform:translateY(-1px)}
+.feed-tabs{padding:0 25px;border-color:var(--line);height:54px}
+.feed-tab{font-size:12px;letter-spacing:.1px}
+.feed-tab.active:after{height:3px;background:var(--purple);box-shadow:0 0 12px #a78bfa66}
+.stories{padding:18px 24px 17px;gap:16px;border-color:var(--line)}
+.story{color:var(--muted);width:58px}
+.story-ring{background:linear-gradient(135deg,#d8ccff,var(--purple));padding:2px}
+.story-ring.seen{background:#3a3d48}
+.story-inner{background:#292632;color:#eee9ff;border-color:var(--bg)}
+.story-add .story-ring{background:#393348}
+.story-add .story-inner{background:#191720;color:var(--purple)}
+.composer-card{padding:18px 24px;border-color:var(--line);background:rgba(255,255,255,.012)}
+.composer-prompt{font-size:13px;line-height:1.6}
+.composer-prompt::placeholder{color:#777C89}
+.tool-btn{color:var(--muted);border-radius:10px}
+.tool-btn span{color:var(--purple)}
+.post-btn{background:var(--purple);color:#171321;border-radius:12px;padding:9px 17px;transition:transform .18s,filter .18s}
+.post-btn:hover{background:var(--purple);filter:brightness(1.08);transform:translateY(-1px)}
+.post{padding:21px 24px 17px;border-color:var(--line)}
+.post:hover{background:rgba(255,255,255,.018)}
+.post-text{color:#E2E1E9;line-height:1.72;font-size:13px}
+.verified{color:var(--purple)}
+.post-media{border-radius:17px;background:#211d2e}
+.art-one,.art-two,.art-three{background:linear-gradient(145deg,#292437,#55466f 58%,#9b8ab9)}
+.art-one:before,.art-two:before,.art-three:before{background:#b6a4e2}
+.art-one:after,.art-two:after,.art-three:after{background:#292437}
+.post-action{border-radius:10px;transition:background .16s,color .16s}
+.post-action.liked,.post-action.saved{color:var(--purple)}
+.right{padding:25px 18px 30px}
+.search,.side-card{background:rgba(255,255,255,.035);border-color:var(--line);border-radius:17px}
+.side-card{background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018))}
+.side-heading a,.follow-btn{color:var(--purple)}
+.follow-btn{border-color:#51466c;background:#a78bfa12;border-radius:10px}
+.follow-btn.following{border-color:var(--line);color:var(--muted);background:transparent}
+.trend,.person{border-color:var(--line)}
+.avatar,.avatar.purple,.avatar.green,.avatar.blue,.avatar.orange{background:linear-gradient(145deg,#d5c9f7,#786b9b);color:#201a2e}
+.avatar.small{width:34px;height:34px}
+.toast{background:rgba(28,27,38,.94);border-color:#51466c;color:var(--text);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:14px}
+.modal{background:#14161d;border-color:#303541;border-radius:22px}
+.modal-input{background:#0d0f14;border-color:var(--line);border-radius:13px}
+.secondary-btn{border-color:var(--line);border-radius:11px}
+.story-view{background:linear-gradient(145deg,#292437,#55466f 58%,#9b8ab9);border:1px solid #ffffff22}
+.mobile-nav{
+ display:flex;position:fixed;z-index:25;left:50%;right:auto;bottom:calc(15px + env(safe-area-inset-bottom));
+ transform:translateX(-50%);width:max-content;max-width:calc(100vw - 24px);
+ height:68px;padding:8px 10px;gap:5px;align-items:center;justify-content:center;
+ border:1px solid var(--dock-border);border-radius:23px;
+ background:var(--dock-bg);box-shadow:0 12px 42px #0008, inset 0 1px 0 #ffffff12;
+ backdrop-filter:blur(28px) saturate(170%);-webkit-backdrop-filter:blur(28px) saturate(170%);
+}
+.mobile-nav button{
+ width:48px;height:48px;flex:0 1 48px;border:0;border-radius:16px;background:transparent;
+ color:#9B9DA9;font-size:21px;display:grid;place-items:center;position:relative;
+ transition:background .18s,color .18s,transform .18s;
+}
+.mobile-nav button:hover{background:#ffffff0b;color:#fff}
+.mobile-nav button.active{color:var(--purple);background:#a78bfa19}
+.mobile-nav .nav-create{width:48px;height:48px;flex-basis:48px;background:var(--purple);color:#171321;font-size:25px;border-radius:16px;box-shadow:0 5px 18px #a78bfa45}
+.mobile-nav .nav-create:hover{background:#b9a7ff;transform:translateY(-2px)}
+.mobile-nav button:active{transform:scale(.94)}
+@media(min-width:701px){
+ body{padding-bottom:105px}
+ .mobile-nav{bottom:22px}
+ .mobile-nav button{width:50px;flex-basis:50px}
+ .app{padding-bottom:30px}
+}
+@media(max-width:1120px) and (min-width:701px){
+ .app{grid-template-columns:190px minmax(0,680px);max-width:900px}
+ .left{padding-left:15px;padding-right:13px}
+ .center{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+}
+@media(max-width:700px){
+ body{padding-bottom:0}
+ .app{display:block;max-width:100%;padding:0 0 110px}
+ .left,.right{display:none}
+ .center{max-width:none;width:100%;min-height:100dvh;border:0;background:transparent}
+ .top{height:62px;padding:0 17px}
+ .mobile-brand{gap:9px}
+ .mobile-brand .brand-mark{width:32px;height:32px;border-radius:11px;font-size:19px}
+ .mobile-brand .brand-name{font-size:19px;letter-spacing:-.9px}
+ .feed-tabs{padding:0 18px;height:51px;gap:27px}
+ .stories{padding:16px 17px 15px;gap:15px}
+ .story{width:54px}
+ .story-ring{width:52px;height:52px}
+ .composer-card{padding:15px 17px;gap:10px}
+ .post{padding:18px 17px 15px}
+ .post-media{height:clamp(205px,64vw,330px)}
+ .mobile-nav{bottom:calc(12px + env(safe-area-inset-bottom));height:64px;padding:7px 8px;gap:3px;border-radius:21px}
+ .mobile-nav button{width:43px;height:46px;flex-basis:43px;border-radius:14px;font-size:20px}
+ .mobile-nav .nav-create{width:45px;height:46px;flex-basis:45px}
+ .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+ .modal-backdrop{align-items:flex-end;padding:10px 10px calc(10px + env(safe-area-inset-bottom))}
+ .modal{border-radius:22px 22px 16px 16px}
+}
+@media(max-width:370px){
+ .mobile-nav{gap:1px;padding-left:5px;padding-right:5px}
+ .mobile-nav button{width:39px;flex-basis:39px}
+ .mobile-nav .nav-create{width:41px;flex-basis:41px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+
 </style>
 </head>
 <body>
@@ -80,8 +208,14 @@
     <div class="footer-links">About　Help　Guidelines　Privacy　Terms<br>© 2026 HOBO Social</div>
   </aside>
 </div>
-<nav class="mobile-nav" aria-label="Mobile navigation">
-  <button class="active" data-page="home" aria-label="Home">⌂</button><button data-page="explore" aria-label="Explore">⌕</button><button class="nav-create" data-create aria-label="Create post">＋</button><button data-page="notifications" aria-label="Notifications">♧</button><button data-page="profile" aria-label="Profile">◉</button>
+<nav class="mobile-nav" aria-label="Main navigation">
+  <button class="active" data-page="home" aria-label="Home" title="Home">⌂</button>
+  <button data-page="explore" aria-label="Explore" title="Explore">⌕</button>
+  <button class="nav-create" data-create aria-label="Create post" title="Create post">＋</button>
+  <button data-page="messages" aria-label="Messages" title="Messages">▢</button>
+  <button data-page="notifications" aria-label="Notifications" title="Notifications">♧</button>
+  <button data-page="saved" aria-label="Bookmarks" title="Bookmarks">◇</button>
+  <button data-page="profile" aria-label="Profile" title="Profile">◉</button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
 <div class="modal-backdrop" id="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-head"><strong id="modal-title">Create a post</strong><button class="modal-close" id="modal-close" aria-label="Close">×</button></div><div id="modal-content"></div><div class="modal-actions"><button class="secondary-btn" id="modal-cancel">Cancel</button><button class="post-btn" id="modal-submit">Publish</button></div></div></div>
