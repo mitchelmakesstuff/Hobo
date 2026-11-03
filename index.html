@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101116">
+<title>HOBO — Your people. Your space.</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#171920;--panel2:#1d2029;--line:#292c36;--muted:#9297a8;--text:#f3f4f8;--accent:#a78bfa;--accent2:#7c5ce7;--green:#65d6a5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;height:100dvh;overflow:hidden}button,input{font:inherit}button{cursor:pointer}
+.app{height:100dvh;display:grid;grid-template-columns:76px 244px minmax(0,1fr);background:var(--bg)}
+.servers{background:#121319;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 0;overflow:auto}
+.brand{width:44px;height:44px;border-radius:15px;background:linear-gradient(145deg,#b8a0ff,#7958db);display:grid;place-items:center;color:#171322;font-size:21px;font-weight:900;letter-spacing:-2px;box-shadow:0 8px 24px #8b6bf033;margin-bottom:7px}
+.server{border:0;width:44px;height:44px;border-radius:15px;background:#252833;color:#d9d9e4;font-weight:750;transition:.18s;position:relative}.server:hover,.server.active{border-radius:13px;background:var(--accent);color:#171322}.server.active:before{content:"";position:absolute;left:-16px;top:9px;height:26px;width:4px;border-radius:0 5px 5px 0;background:var(--accent)}.server.add{font-size:24px;color:var(--green);background:#1b2b29}
+.sidebar{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.workspace-head{height:72px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.workspace-head h1{font-size:16px;margin:0;letter-spacing:-.4px}.workspace-head small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.tiny-btn{border:0;background:transparent;color:var(--muted);font-size:19px;padding:7px;border-radius:8px}.tiny-btn:hover{background:#292d38;color:white}
+.sidebar-scroll{padding:18px 11px;overflow:auto;flex:1}.section-label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.2px;padding:0 9px 9px}.section-label button{border:0;background:none;color:var(--muted);font-size:17px}.channel{width:100%;border:0;background:transparent;color:#aeb2c0;padding:9px 10px;border-radius:8px;text-align:left;display:flex;align-items:center;gap:9px;margin:2px 0}.channel:hover{background:#252833;color:white}.channel.active{background:#302b42;color:#d8caff}.hash{font-size:18px;color:#777d8e}.channel.active .hash{color:var(--accent)}.channel .count{margin-left:auto;color:#f1a5a5;font-size:11px}.voice-box{margin:18px 5px;padding:12px;border-radius:10px;background:#20242c;color:var(--muted);font-size:12px}.voice-box strong{color:var(--green);display:block;margin-bottom:3px}.profile{padding:12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;background:#15171e}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f0b58c,#b96d77);color:#271a20;font-weight:800;flex:none}.profile-info{min-width:0;flex:1}.profile-info strong{display:block;font-size:12px}.profile-info small{color:var(--green);font-size:10px}.profile button{border:0;background:none;color:var(--muted);font-size:17px}
+.main{min-width:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 80% 0%,#24203933,transparent 45%),var(--bg)}
+.topbar{height:72px;display:flex;align-items:center;gap:12px;padding:0 24px;border-bottom:1px solid var(--line);flex:none}.topbar .channel-name{font-weight:750;font-size:14px}.topbar .hash{font-size:22px}.topbar .topic{color:var(--muted);font-size:12px;border-left:1px solid var(--line);padding-left:14px;margin-left:3px}.top-actions{margin-left:auto;display:flex;gap:7px}.top-actions button{width:34px;height:34px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:17px}.top-actions button:hover{background:var(--panel2);color:white}
+.welcome{padding:26px 28px 15px;max-width:900px;width:100%;margin:0 auto}.welcome .eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:1.6px}.welcome h2{font-size:23px;letter-spacing:-.8px;margin:5px 0}.welcome p{color:var(--muted);font-size:13px;margin:0}
+.messages{flex:1;overflow:auto;padding:8px 28px 24px}.message-list{max-width:900px;margin:0 auto}.day-divider{display:flex;align-items:center;gap:12px;color:#74798a;font-size:10px;font-weight:800;letter-spacing:1px;margin:18px 0}.day-divider:before,.day-divider:after{content:"";height:1px;background:var(--line);flex:1}
+.message{display:flex;gap:12px;padding:10px 8px;margin:2px -8px;border-radius:9px}.message:hover{background:#ffffff05}.message .avatar{width:38px;height:38px}.message-body{min-width:0;flex:1}.message-meta{display:flex;align-items:baseline;gap:9px;margin-bottom:3px}.message-meta strong{font-size:13px}.message-meta time{font-size:10px;color:#74798a}.message-body p{margin:0;color:#c4c7d2;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.message-body .mention{color:#c7b4ff;background:#a78bfa18;padding:1px 4px;border-radius:4px}
+.composer-wrap{padding:10px 28px 22px;flex:none}.composer{max-width:900px;margin:0 auto;background:#20232c;border:1px solid #303440;border-radius:13px;display:flex;align-items:flex-end;padding:9px 11px;gap:9px;box-shadow:0 10px 30px #0002}.composer button{border:0;background:transparent;color:#9298aa;font-size:21px;padding:5px}.composer button:hover{color:white}.composer textarea{flex:1;min-width:0;resize:none;max-height:120px;min-height:28px;border:0;outline:0;background:transparent;color:var(--text);padding:5px 0;font:13px/1.5 inherit}.composer textarea::placeholder{color:#777d8e}.send{background:var(--accent2)!important;color:white!important;border-radius:9px!important;width:34px;height:34px;font-size:15px!important}.hint{max-width:900px;margin:7px auto 0;color:#666c7c;font-size:10px;padding-left:4px}
+.mobile-menu{display:none}
+@media(max-width:760px){.app{grid-template-columns:62px minmax(0,1fr)}.servers{padding-top:12px;gap:10px}.server{width:40px;height:40px}.server.active:before{left:-11px}.sidebar{position:fixed;z-index:5;left:62px;top:0;bottom:0;width:min(270px,calc(100vw - 62px));transform:translateX(-110%);transition:transform .22s;box-shadow:18px 0 50px #0008}.app.menu-open .sidebar{transform:translateX(0)}.main{grid-column:2}.topbar{height:62px;padding:0 13px}.mobile-menu{display:inline-flex;border:0;background:transparent;color:var(--muted);font-size:20px;padding:5px}.topbar .topic{display:none}.welcome{padding:20px 16px 12px}.welcome h2{font-size:20px}.messages{padding:5px 14px 18px}.composer-wrap{padding:8px 12px 15px}.message{gap:9px}.message .avatar{width:34px;height:34px}.top-actions{gap:1px}.top-actions button{width:30px}.hint{display:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <nav class="servers" aria-label="Communities">
+    <div class="brand" title="HOBO">h.</div>
+    <button class="server active" data-server="The Lobby" title="The Lobby">L</button>
+    <button class="server" data-server="Pixel People" title="Pixel People">P</button>
+    <button class="server" data-server="Late Night Club" title="Late Night Club">N</button>
+    <button class="server add" title="Add a community" aria-label="Add a community">+</button>
+  </nav>
+  <aside class="sidebar">
+    <div class="workspace-head"><div><h1 id="workspace-name">The Lobby</h1><small>Community space</small></div><button class="tiny-btn" title="Community options">⌄</button></div>
+    <div class="sidebar-scroll">
+      <div class="section-label">YOUR CHANNELS <button title="Add channel">+</button></div>
+      <button class="channel active" data-channel="general"><span class="hash">#</span> general</button>
+      <button class="channel" data-channel="introductions"><span class="hash">#</span> introductions</button>
+      <button class="channel" data-channel="gaming"><span class="hash">#</span> gaming <span class="count">3</span></button>
+      <button class="channel" data-channel="show-and-tell"><span class="hash">#</span> show-and-tell</button>
+      <div class="section-label" style="margin-top:25px">HANGOUTS <button title="Add voice room">+</button></div>
+      <button class="channel"><span class="hash">◖</span> The lounge</button>
+      <button class="channel"><span class="hash">◖</span> Game room</button>
+      <div class="voice-box"><strong>● No one's around</strong>Jump into a voice room and say hello.</div>
+    </div>
+    <div class="profile"><div class="avatar">Y</div><div class="profile-info"><strong>You</strong><small>● Online</small></div><button title="User settings">⚙</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button class="mobile-menu" id="menu-toggle" aria-label="Open channels">☰</button><span class="hash">#</span><span class="channel-name" id="top-channel">general</span><span class="topic" id="topic">A place for everything and everyone.</span><div class="top-actions"><button title="Notifications">♧</button><button title="Pinned messages">♧</button><button title="Search">⌕</button></div></header>
+    <section class="welcome"><div class="eyebrow">WELCOME TO HOBO</div><h2 id="welcome-title">Good things start with a hello.</h2><p id="welcome-copy">This is the beginning of <strong>#general</strong>. Make yourself at home.</p></section>
+    <section class="messages" id="messages" aria-live="polite"><div class="message-list" id="message-list"></div></section>
+    <footer class="composer-wrap"><form class="composer" id="message-form"><button type="button" title="Add attachment">＋</button><textarea id="message-input" rows="1" placeholder="Message #general" aria-label="Write a message"></textarea><button type="button" title="Add emoji">☺</button><button class="send" type="submit" title="Send message" aria-label="Send message">➤</button></form><div class="hint">You're in the early version of HOBO · Be kind to each other.</div></footer>
+  </main>
+</div>
+<script>
+const app=document.getElementById('app'), list=document.getElementById('message-list'), input=document.getElementById('message-input');
+const starter={
+ general:[['Maya','M','10:14 AM','Welcome to HOBO! This is our little corner of the internet. Make yourself comfortable ✨','#d8a0b8'],['Jordan','J','10:16 AM','A new home for good conversations. I like the sound of that.','#8db8e8'],['Kai','K','10:19 AM','What has everyone been playing lately?','#a9d59a']],
+ introductions:[['Maya','M','9:42 AM','New around here? Tell us a little about yourself. No pressure — just say hi!','#d8a0b8']],
+ gaming:[['Jordan','J','Yesterday','Anyone up for a game later?','#8db8e8'],['Kai','K','Yesterday','Always. Drop your game recommendations here.','#a9d59a']],
+ 'show-and-tell':[['Maya','M','Yesterday','Share something you made, found, or just think is cool.','#d8a0b8']]
+};
+let current='general';
+function renderMessages(){list.innerHTML='';const divider=document.createElement('div');divider.className='day-divider';divider.textContent='TODAY';list.appendChild(divider);(starter[current]||[]).forEach(m=>addMessage(...m,false));}
+function addMessage(name,initial,time,text,color,scroll=true){const row=document.createElement('article');row.className='message';const avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=initial;avatar.style.background=color;const body=document.createElement('div');body.className='message-body';const meta=document.createElement('div');meta.className='message-meta';const author=document.createElement('strong');author.textContent=name;const stamp=document.createElement('time');stamp.textContent=time;meta.append(author,stamp);const p=document.createElement('p');p.textContent=text;body.append(meta,p);row.append(avatar,body);list.appendChild(row);if(scroll)document.getElementById('messages').scrollTop=document.getElementById('messages').scrollHeight;}
+function selectChannel(name){current=name;document.querySelectorAll('.channel[data-channel]').forEach(b=>b.classList.toggle('active',b.dataset.channel===name));document.getElementById('top-channel').textContent=name;document.getElementById('topic').textContent=({general:'A place for everything and everyone.',introductions:'Meet the people behind the usernames.',gaming:'Talk games, share clips, find your next favourite.', 'show-and-tell':'Show us what you have been working on.'})[name]||'Your space to chat.';document.getElementById('welcome-copy').innerHTML='This is the beginning of <strong>#'+name+'</strong>. Make yourself at home.';input.placeholder='Message #'+name;renderMessages();app.classList.remove('menu-open');}
+document.querySelectorAll('.channel[data-channel]').forEach(b=>b.addEventListener('click',()=>selectChannel(b.dataset.channel)));
+document.querySelectorAll('.server[data-server]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.server').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('workspace-name').textContent=b.dataset.server;document.querySelector('.sidebar-scroll').style.opacity='.65';setTimeout(()=>document.querySelector('.sidebar-scroll').style.opacity='1',180);}));
+document.getElementById('menu-toggle').addEventListener('click',()=>app.classList.toggle('menu-open'));
+document.getElementById('message-form').addEventListener('submit',e=>{e.preventDefault();const value=input.value.trim();if(!value)return;addMessage('You','Y',new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),value,'#b7a1f2');starter[current].push(['You','Y','Just now',value,'#b7a1f2']);input.value='';input.style.height='auto';});
+input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,120)+'px';});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('message-form').requestSubmit();}});
+renderMessages();
+</script>
+</body>
+</html>
