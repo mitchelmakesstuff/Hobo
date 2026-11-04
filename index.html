@@ -1,341 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0B0A12">
-<meta name="description" content="HOBO — A different kind of social space. Express yourself, find your people.">
-<title>HOBO — Your world, your people</title>
-<style>
-:root{
- color-scheme:dark;
- --bg:#0B0A12;--panel:#15121E;--panel2:#1B1725;--panel3:#262035;
- --line:#30283B;--text:#F5F1FF;--soft:#C9C1D4;--muted:#AAA3B8;--quiet:#827A91;
- --purple:#B69AFF;--purple-strong:#A783FF;--lime:#C7F36B;--pink:#FF91B5;--blue:#83C8FF;
- --danger:#FF647C;--success:#A9E879;
- --radius-sm:12px;--radius-md:18px;--radius-lg:24px;--radius-xl:30px;
- --shadow:0 20px 65px #0009;
- --glass:rgba(25,21,34,.78);--glass-line:rgba(255,255,255,.13);
- --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.55}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(ellipse at 50% -28%,#241b36 0%,#100e18 34%,var(--bg) 68%);overflow-x:hidden;padding-bottom:116px}
-button,input,textarea{font:inherit}
-button{color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
-button:disabled{opacity:.45;cursor:not-allowed}
-.app{width:100%;max-width:1480px;min-height:100dvh;margin:auto;display:grid;grid-template-columns:minmax(190px,240px) minmax(0,680px) minmax(220px,290px);justify-content:center;gap:0}
-.left{height:100dvh;position:sticky;top:0;padding:28px 18px 24px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column}
-.brand{display:flex;align-items:center;gap:11px;padding:0 8px;margin-bottom:38px}
-.brand-mark{width:42px;height:42px;border-radius:15px;background:var(--purple);display:grid;place-items:center;color:#171220;font-weight:1000;font-size:25px;letter-spacing:-2px;box-shadow:0 7px 24px #b69aff38}
-.brand-name{font-size:23px;font-weight:950;letter-spacing:-1.3px}
-.brand-tag{font-size:12px;color:var(--muted);margin-top:-3px}
-.nav{display:grid;gap:7px}
-.nav-btn{height:49px;border:0;background:transparent;border-radius:15px;display:flex;align-items:center;gap:15px;padding:0 14px;color:var(--muted);text-align:left;font-size:15px;font-weight:700;transition:background .18s,color .18s}
-.nav-btn:hover{background:#ffffff09;color:#fff}
-.nav-btn.active{background:#B69AFF19;color:var(--purple)}
-.nav-icon{width:22px;text-align:center;font-size:20px;line-height:1}
-.nav-btn .nav-label{flex:1}
-.nav-count{font-size:11px;border-radius:20px;background:var(--lime);color:#171b0c;padding:2px 8px;font-weight:900}
-.create-side{margin-top:23px;border:0;border-radius:16px;height:50px;background:var(--purple);color:#171220;font-weight:900;box-shadow:0 8px 26px #b69aff30}
-.left-bottom{margin-top:auto}
-.mini-profile{display:flex;align-items:center;gap:10px;padding:12px;border-radius:17px;border:1px solid var(--line);background:#ffffff06}
-.avatar{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;color:#24182b;font-weight:900;background:linear-gradient(145deg,#ffb6c9,#b69aff);font-size:16px}
-.avatar.small{width:38px;height:38px;font-size:14px}
-.avatar.purple,.avatar.green,.avatar.blue,.avatar.orange{background:linear-gradient(145deg,#e0d1ff,#9476d5);color:#20182b}
-.mini-user{min-width:0;flex:1}
-.mini-user strong{display:block;font-size:14px}
-.mini-user span{display:block;font-size:12px;color:var(--muted)}
-.center{width:100%;min-width:0;max-width:680px;min-height:100dvh;border-left:1px solid var(--line);border-right:1px solid var(--line);background:#100e170d}
-.top{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 25px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,10,18,.82);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);z-index:5}
-.page-title{font-size:24px;font-weight:900;letter-spacing:-.8px}
-.top-actions{display:flex;align-items:center;gap:9px}
-.icon-btn{width:44px;height:44px;border:1px solid var(--line);background:var(--panel);border-radius:15px;color:var(--soft);font-size:20px;display:grid;place-items:center}
-.icon-btn:hover{background:var(--panel3);color:#fff}
-.mobile-brand{display:none}
-.feed-tabs{height:58px;display:flex;align-items:stretch;border-bottom:1px solid var(--line);padding:0 25px;gap:30px}
-.feed-tab{position:relative;border:0;background:none;color:var(--muted);font-size:15px;font-weight:800;padding:0 2px}
-.feed-tab.active{color:var(--text)}
-.feed-tab.active:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:3px;background:var(--purple);border-radius:5px;box-shadow:0 0 16px #b69aff65}
-.stories{padding:20px 24px 19px;border-bottom:1px solid var(--line);display:flex;gap:17px;overflow-x:auto;scrollbar-width:none}
-.stories::-webkit-scrollbar{display:none}
-.story{width:62px;flex:none;text-align:center;border:0;background:none;padding:0;color:var(--muted);font-size:12px;font-weight:650}
-.story-ring{width:59px;height:59px;padding:2.5px;border-radius:50%;display:block;margin:0 auto 7px;background:linear-gradient(135deg,var(--lime),var(--purple),var(--pink))}
-.story-ring.seen{background:#46404f}
-.story-inner{width:100%;height:100%;border:2px solid var(--bg);border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#e4c8ff,#9875c8);color:#21172a;font-size:17px;font-weight:900}
-.story-add .story-ring{background:linear-gradient(135deg,var(--lime),var(--purple))}
-.story-add .story-inner{background:#211b2d;color:var(--lime);font-size:27px;border:2px solid var(--bg)}
-.story-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-.composer-card{padding:21px 24px;border-bottom:1px solid var(--line);display:flex;gap:14px;background:#ffffff03}
-.composer-main{min-width:0;flex:1}
-.composer-prompt{width:100%;min-height:48px;resize:vertical;max-height:150px;background:transparent;border:0;border-bottom:1px solid transparent;color:var(--text);outline:none;padding:9px 0;font-size:16px;line-height:1.55}
-.composer-prompt:focus{border-bottom-color:#514263}
-.composer-prompt::placeholder{color:var(--muted)}
-.composer-actions{display:flex;align-items:center;justify-content:space-between;padding-top:12px}
-.media-actions{display:flex;gap:5px;flex-wrap:wrap}
-.tool-btn{border:0;background:transparent;color:var(--muted);padding:8px 10px;border-radius:12px;font-size:13px;font-weight:700}
-.tool-btn:hover{background:#ffffff0a;color:var(--text)}
-.tool-btn span{margin-right:6px;color:var(--purple);font-size:17px}
-.post-btn{border:0;border-radius:999px;background:var(--purple);color:#171220;font-size:14px;font-weight:900;padding:10px 19px}
-.post-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.post{padding:23px 24px 19px;border-bottom:1px solid var(--line);transition:background .16s}
-.post:hover{background:#ffffff04}
-.post-head{display:flex;align-items:center;gap:12px}
-.post-author{min-width:0;flex:1}
-.author-line{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.author-line strong{font-size:15px;font-weight:850}
-.verified{color:var(--lime);font-size:14px}
-.handle,.post-time{color:var(--muted);font-size:13px}
-.post-menu{border:0;background:none;color:var(--muted);font-size:21px;padding:4px 8px;border-radius:10px}
-.post-text{font-size:16px;line-height:1.65;color:#eee9f7;margin:14px 0 15px;white-space:pre-wrap;overflow-wrap:anywhere}
-.post-media{height:300px;border-radius:22px;overflow:hidden;position:relative;margin:14px 0 15px;background:#292137}
-.art{height:100%;width:100%;display:flex;align-items:flex-end;padding:24px;position:relative;isolation:isolate}
-.art:before,.art:after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(1px)}
-.art-one{background:radial-gradient(circle at 72% 24%,#d7b2a6 0 7%,transparent 7.5%),linear-gradient(135deg,#382c52,#b16f8d 54%,#e7b49a)}
-.art-one:before{width:230px;height:230px;background:#f3c3a1;right:9%;top:18%;opacity:.7}
-.art-one:after{width:330px;height:170px;background:#5c416d;left:-5%;bottom:-25%;transform:rotate(-18deg)}
-.art-two{background:linear-gradient(145deg,#1b3b3a,#376d64 48%,#d0a77b)}
-.art-two:before{width:260px;height:260px;background:#c5d5a1;right:12%;top:16%;opacity:.55}
-.art-two:after{width:380px;height:120px;background:#193d3a;bottom:-30px;left:-20px;transform:rotate(-8deg)}
-.art-three{background:linear-gradient(135deg,#29213f,#62538f 55%,#c48ca9)}
-.art-three:before{width:220px;height:220px;background:#d4b0d0;right:17%;top:18%;opacity:.65}
-.art-three:after{width:330px;height:140px;background:#30243d;left:-8%;bottom:-25%}
-.art-copy{position:relative;z-index:1}
-.art-copy small{font-size:12px;letter-spacing:2px;font-weight:900;color:#fffbd0}
-.art-copy strong{display:block;font-size:clamp(26px,4vw,36px);line-height:1.04;letter-spacing:-1.4px;max-width:290px;color:white;text-shadow:0 2px 20px #0005}
-.art-copy span{display:block;font-size:13px;color:#fffD;margin-top:9px}
-.post-stats{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px;padding:0 2px 9px}
-.post-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.post-action{border:0;background:none;color:var(--muted);font-size:13px;font-weight:700;padding:9px 10px;border-radius:12px}
-.post-action:hover{background:#ffffff09;color:white}
-.post-action .action-icon{font-size:18px;margin-right:6px;vertical-align:-2px}
-.post-action.liked{color:var(--pink)}
-.post-action.saved{color:var(--lime)}
-.right{padding:27px 19px 30px;min-width:0}
-.search{height:48px;border:1px solid var(--line);border-radius:999px;background:var(--panel);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--muted)}
-.search input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
-.search input::placeholder{color:var(--muted)}
-.side-card{margin-top:22px;padding:19px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#1a1623,#14111c)}
-.side-heading{font-size:16px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
-.side-heading a{font-size:13px;color:var(--purple);cursor:pointer}
-.trend{padding:12px 0;border-top:1px solid var(--line)}
-.trend:first-of-type{border-top:0;padding-top:0}
-.trend small{display:block;color:var(--muted);font-size:12px}
-.trend strong{display:block;font-size:14px;margin:4px 0}
-.trend span{font-size:12px;color:var(--muted)}
-.person{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)}
-.person:first-of-type{border-top:0;padding-top:0}
-.person-info{min-width:0;flex:1}
-.person-info strong{display:block;font-size:13px}
-.person-info span{display:block;color:var(--muted);font-size:12px}
-.follow-btn{border:1px solid #69548e;border-radius:999px;background:#b69aff18;color:var(--purple);padding:8px 13px;font-size:12px;font-weight:850}
-.follow-btn.following{border-color:var(--line);background:transparent;color:var(--muted)}
-.footer-links{font-size:12px;color:var(--quiet);line-height:2;padding:19px 4px}
-.footer-links a{color:inherit;text-decoration:none;margin-right:8px}
-.toast{position:fixed;left:50%;bottom:105px;transform:translateX(-50%);z-index:40;padding:13px 18px;border:1px solid #514263;border-radius:16px;background:rgba(35,28,47,.96);color:var(--text);box-shadow:var(--shadow);font-size:14px;display:none;max-width:calc(100vw - 30px);text-align:center;backdrop-filter:blur(18px)}
-.modal-backdrop{position:fixed;inset:0;background:#000b;backdrop-filter:blur(9px);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
-.modal-backdrop.open{display:flex}
-.modal{width:min(480px,100%);background:#1b1725;border:1px solid #40364e;border-radius:26px;box-shadow:var(--shadow);padding:25px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.modal-head strong{font-size:20px;font-weight:900}
-.modal-close{border:0;background:#ffffff0b;color:var(--muted);font-size:23px;width:38px;height:38px;border-radius:50%}
-.modal p{font-size:14px;color:var(--muted)}
-.modal-input{width:100%;background:#100e17;border:1px solid var(--line);border-radius:15px;color:var(--text);padding:14px;font-size:15px;margin:7px 0 14px}
-.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}
-.secondary-btn{border:1px solid var(--line);background:transparent;border-radius:999px;padding:10px 16px;font-size:13px;color:var(--soft)}
-.story-view{min-height:390px;border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#38294f,#a16c9a 60%,#dca68c)}
-.story-view strong{font-size:30px;line-height:1.1;max-width:280px}
-.story-view span{font-size:13px;color:#fffD}
-.mobile-nav{display:flex;position:fixed;z-index:45;left:50%;right:auto;bottom:calc(13px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(410px,calc(100vw - 30px));height:76px;padding:9px 20px;gap:0;align-items:center;justify-content:space-between;border:1px solid var(--glass-line);border-radius:999px;background:var(--glass);box-shadow:0 16px 48px #0009,inset 0 1px 0 #ffffff18;backdrop-filter:blur(32px) saturate(170%);-webkit-backdrop-filter:blur(32px) saturate(170%)}
-.mobile-nav button{width:48px;height:48px;flex:0 0 48px;border:0;border-radius:50%;background:transparent;color:#aaa3b8;display:grid;place-items:center;position:relative;transition:background .18s,color .18s,transform .18s}
-.mobile-nav button svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.mobile-nav button:hover{background:#ffffff0c;color:#fff}
-.mobile-nav button.active{color:#fff;background:#ffffff0b}
-.mobile-nav .nav-create{width:54px;height:54px;flex-basis:54px;background:var(--purple);color:#171220;border-radius:50%;box-shadow:0 6px 22px #b69aff42,inset 0 1px 0 #ffffff65}
-.mobile-nav .nav-create span{font-size:28px;font-weight:800;line-height:1}
-.mobile-nav button:active{transform:scale(.94)}
-@media(min-width:701px){.mobile-nav{bottom:22px}.app{padding-bottom:30px}}
-@media(max-width:1120px) and (min-width:701px){.app{grid-template-columns:190px minmax(0,680px);max-width:900px}.right{display:none}.left{padding-left:15px;padding-right:13px}}
-@media(max-width:700px){
- body{padding-bottom:0}
- .app{display:block;max-width:100%;padding:0 0 112px}
- .left,.right{display:none}
- .center{max-width:none;width:100%;min-height:100dvh;border:0}
- .top{height:65px;padding:0 17px}
- .mobile-brand{display:flex;align-items:center;gap:9px}
- .mobile-brand .brand-mark{width:35px;height:35px;border-radius:13px;font-size:21px}
- .mobile-brand .brand-name{font-size:21px}
- .page-title{display:none}
- .top-actions{gap:7px}
- .icon-btn{width:40px;height:40px}
- .feed-tabs{padding:0 19px;height:55px;gap:28px}
- .stories{padding:18px 17px 16px;gap:15px}
- .story{width:59px}
- .story-ring{width:56px;height:56px}
- .composer-card{padding:17px 17px;gap:11px}
- .composer-card>.avatar{width:39px;height:39px}
- .composer-prompt{font-size:16px;min-height:43px}
- .tool-btn{padding:8px 7px;font-size:12px}
- .post-btn{padding:9px 16px;font-size:13px}
- .post{padding:20px 17px 17px}
- .post-media{height:clamp(220px,68vw,330px);border-radius:20px}
- .post-text{font-size:16px}
- .mobile-nav{bottom:calc(12px + env(safe-area-inset-bottom));height:72px;width:min(390px,calc(100vw - 28px));padding:8px 17px}
- .mobile-nav button{width:45px;height:48px;flex-basis:45px}
- .mobile-nav .nav-create{width:52px;height:52px;flex-basis:52px}
- .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
- .modal-backdrop{align-items:flex-end;padding:10px}
- .modal{border-radius:26px 26px 16px 16px;padding:22px}
-}
-@media(max-width:360px){.mobile-nav{padding-left:12px;padding-right:12px}.mobile-nav button{width:42px;flex-basis:42px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
-
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Hobo — Drift Social</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/themes.css" id="theme-sheet">
 </head>
-<body>
-<div class="app">
-  <aside class="left">
-    <div class="brand"><div class="brand-mark">h.</div><div><div class="brand-name">HOBO</div><div class="brand-tag">Your world, your people.</div></div></div>
-    <nav class="nav" aria-label="Main navigation">
-      <button class="nav-btn active" data-page="home"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></button>
-      <button class="nav-btn" data-page="explore"><span class="nav-icon">⌕</span><span class="nav-label">Explore</span></button>
-      <button class="nav-btn" data-page="messages"><span class="nav-icon">▢</span><span class="nav-label">Messages</span></button>
-      <button class="nav-btn" data-page="notifications"><span class="nav-icon">♧</span><span class="nav-label">Notifications</span><span class="nav-count">3</span></button>
-      <button class="nav-btn" data-page="profile"><span class="nav-icon">◉</span><span class="nav-label">Profile</span></button>
-      <button class="nav-btn" data-page="saved"><span class="nav-icon">◇</span><span class="nav-label">Bookmarks</span></button>
-    </nav>
-    <button class="create-side" data-create>＋　Create post</button>
-    <div class="left-bottom"><div class="mini-profile"><div class="avatar purple" id="sidebar-avatar">Y</div><div class="mini-user"><strong id="sidebar-name">Your profile</strong><span>@you</span></div><button class="icon-btn" id="edit-profile" aria-label="Edit profile">···</button></div></div>
-  </aside>
-  <main class="center">
-    <header class="top"><div class="mobile-brand"><div class="brand-mark">h.</div><div class="brand-name">HOBO</div></div><div class="page-title" id="page-title">Home</div><div class="top-actions"><button class="icon-btn" id="top-search" aria-label="Search">⌕</button><button class="icon-btn" id="top-notifications" aria-label="Notifications">♧</button></div></header>
-    <div id="home-view">
-      <div class="feed-tabs"><button class="feed-tab active" data-feed="for-you">For You</button><button class="feed-tab" data-feed="following">Following</button></div>
-      <section class="stories" id="stories">
-        <button class="story story-add" data-story="Your story"><span class="story-ring"><span class="story-inner">＋</span></span><span class="story-name">Your story</span></button>
-        <button class="story" data-story="Amara"><span class="story-ring"><span class="story-inner">A</span></span><span class="story-name">Amara</span></button>
-        <button class="story" data-story="Daniel"><span class="story-ring"><span class="story-inner" style="background:linear-gradient(145deg,#b8d5ff,#719bd7)">D</span></span><span class="story-name">Daniel</span></button>
-        <button class="story" data-story="Zara"><span class="story-ring"><span class="story-inner" style="background:linear-gradient(145deg,#b8ebd3,#69bfa1)">Z</span></span><span class="story-name">Zara</span></button>
-        <button class="story" data-story="Mika"><span class="story-ring seen"><span class="story-inner" style="background:linear-gradient(145deg,#ffd1a8,#d98c6c)">M</span></span><span class="story-name">Mika</span></button>
-        <button class="story" data-story="Tobi"><span class="story-ring"><span class="story-inner" style="background:linear-gradient(145deg,#d4c2ff,#8c72e9)">T</span></span><span class="story-name">Tobi</span></button>
-        <button class="story" data-story="Nia"><span class="story-ring"><span class="story-inner" style="background:linear-gradient(145deg,#e8b9cf,#9c709c)">N</span></span><span class="story-name">Nia</span></button>
-      </section>
-      <section class="composer-card"><div class="avatar purple" id="composer-avatar">Y</div><div class="composer-main"><textarea class="composer-prompt" id="quick-post" rows="1" placeholder="What's happening in your world?"></textarea><div class="composer-actions"><div class="media-actions"><button class="tool-btn" data-compose-type="photo"><span>▧</span>Photo</button><button class="tool-btn" data-compose-type="video"><span>▷</span>Video</button><button class="tool-btn" data-compose-type="mood"><span>☺</span>Mood</button></div><button class="post-btn" id="quick-publish">Post</button></div></div></section>
-      <section id="feed"></section>
+<body class="theme-night">
+<canvas id="field"></canvas>
+
+<header id="topbar">
+  <div id="logo">HOBO<span class="dot">.</span></div>
+  <nav>
+    <button id="btn-theme" title="Change theme" aria-label="Change theme">◐</button>
+    <button id="btn-pouch" title="Open pouch" aria-label="Open pouch">🎒 <span id="pouch-count">0</span></button>
+  </nav>
+</header>
+
+<button id="btn-drop" aria-label="Drop a flare">✳ Drop a flare</button>
+
+<div id="hint">tap a drifting flare to catch it</div>
+
+<!-- Drop modal -->
+<div class="modal" id="modal-drop" hidden>
+  <div class="sheet">
+    <div class="tabs">
+      <button data-tab="text" class="tab active">Text</button>
+      <button data-tab="doodle" class="tab">Doodle</button>
     </div>
-    <section id="other-view" style="display:none"></section>
-  </main>
-  <aside class="right">
-    <label class="search"><span>⌕</span><input id="desktop-search" placeholder="Search HOBO" aria-label="Search HOBO"></label>
-    <section class="side-card"><div class="side-heading">What's happening <a id="see-trends">See all</a></div>
-      <div class="trend"><small>Technology · Trending</small><strong>#BuildInPublic</strong><span>2.4k posts</span></div>
-      <div class="trend"><small>Entertainment · Trending</small><strong>Weekend watchlist</strong><span>1.8k posts</span></div>
-      <div class="trend"><small>Gaming · Popular</small><strong>What are you playing?</strong><span>986 posts</span></div>
-    </section>
-    <section class="side-card"><div class="side-heading">People to know <a id="see-people">Explore</a></div>
-      <div class="person"><div class="avatar small">A</div><div class="person-info"><strong>Amara Okafor</strong><span>@amaracreates</span></div><button class="follow-btn">Follow</button></div>
-      <div class="person"><div class="avatar small blue">D</div><div class="person-info"><strong>Daniel James</strong><span>@danielj</span></div><button class="follow-btn">Follow</button></div>
-      <div class="person"><div class="avatar small green">Z</div><div class="person-info"><strong>Zara Bello</strong><span>@zarab</span></div><button class="follow-btn">Follow</button></div>
-    </section>
-    <div class="footer-links">About　Help　Guidelines　Privacy　Terms<br>© 2026 HOBO Social</div>
-  </aside>
+    <div id="drop-text">
+      <textarea id="flare-text" maxlength="140" placeholder="what's drifting through your mind?"></textarea>
+      <div class="moods">
+        <button class="mood" data-mood="#ff6b8b" style="background:#ff6b8b" aria-label="mood pink"></button>
+        <button class="mood" data-mood="#ffd166" style="background:#ffd166" aria-label="mood yellow"></button>
+        <button class="mood" data-mood="#7bdff2" style="background:#7bdff2" aria-label="mood blue"></button>
+        <button class="mood" data-mood="#b8f2a9" style="background:#b8f2a9" aria-label="mood green"></button>
+        <button class="mood" data-mood="#d5b3ff" style="background:#d5b3ff" aria-label="mood purple"></button>
+      </div>
+    </div>
+    <div id="drop-doodle" hidden>
+      <canvas id="doodle-pad" width="300" height="300"></canvas>
+      <button id="doodle-clear" class="ghost-btn">clear</button>
+    </div>
+    <div class="sheet-actions">
+      <button id="drop-cancel" class="ghost-btn">cancel</button>
+      <button id="drop-send">Release ✳</button>
+    </div>
+  </div>
 </div>
-<nav class="mobile-nav" aria-label="Main navigation">
-  <button class="active" data-page="home" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5h-17z"/></svg></button>
-  <button data-page="explore" aria-label="Search" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg></button>
-  <button class="nav-create" data-create aria-label="Create post" title="Create post"><span>H</span></button>
-  <button data-page="profile" aria-label="Profile" title="Profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.7"/><path d="M4.5 21c.4-4.1 3.2-6.2 7.5-6.2s7.1 2.1 7.5 6.2"/></svg></button>
-</nav>
-<div class="toast" id="toast" role="status"></div>
-<div class="modal-backdrop" id="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-head"><strong id="modal-title">Create a post</strong><button class="modal-close" id="modal-close" aria-label="Close">×</button></div><div id="modal-content"></div><div class="modal-actions"><button class="secondary-btn" id="modal-cancel">Cancel</button><button class="post-btn" id="modal-submit">Publish</button></div></div></div>
-<script>
-(() => {
-'use strict';
-const $=id=>document.getElementById(id);
-const STORAGE='hobo_social_stage1';
-const defaults=[
-{id:1,name:'Amara Okafor',handle:'@amaracreates',initial:'A',tone:'',time:'18 min',verified:true,text:'A reminder that you do not have to have everything figured out to start something meaningful. Small steps count too. 🌱',likes:128,comments:18,reposts:9,following:true},
-{id:2,name:'Daniel James',handle:'@danielj',initial:'D',tone:'blue',time:'42 min',verified:false,text:'Spent the afternoon away from screens, found a quiet little spot and remembered how good it feels to slow down.',media:'one',likes:86,comments:12,reposts:4,following:true},
-{id:3,name:'Zara Bello',handle:'@zarab',initial:'Z',tone:'green',time:'1 hr',verified:true,text:'What is one game, book, or song you think everyone should experience at least once? I need new recommendations.',likes:204,comments:47,reposts:21,following:false},
-{id:4,name:'Mika Stone',handle:'@mikastone',initial:'M',tone:'orange',time:'2 hr',verified:false,text:'Made a tiny moodboard for the week. Keeping things simple, warm and a little colourful.',media:'two',likes:63,comments:8,reposts:3,following:false},
-{id:5,name:'Tobi A.',handle:'@tobiwrites',initial:'T',tone:'purple',time:'3 hr',verified:false,text:'Unpopular opinion: the best conversations start when nobody is trying to sound impressive. Just be curious.',likes:319,comments:62,reposts:35,following:true}
-];
-let state=load(),activeFeed='for-you',activePage='home',modalMode='post',pendingType='text';
-function load(){try{return Object.assign({posts:defaults,liked:[],saved:[],following:['@amaracreates','@danielj','@tobiwrites'],displayName:'You',initial:'Y'},JSON.parse(localStorage.getItem(STORAGE)||'{}'))}catch(e){return {posts:defaults,liked:[],saved:[],following:['@amaracreates','@danielj','@tobiwrites'],displayName:'You',initial:'Y'}}}
-function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){toast('Could not save in this browser.')}}
-function toast(s){const el=$('toast');el.textContent=s;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',2400)}
-function avatar(p,extra=''){return '<div class="avatar '+(p.tone||'')+' '+extra+'">'+escapeHTML(p.initial||p.name[0])+'</div>'}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function postCard(p){
-const liked=state.liked.includes(p.id),saved=state.saved.includes(p.id);
-let media=p.media?'<div class="post-media"><div class="art art-'+(p.media==='two'?'two':p.media==='three'?'three':'one')+'"><div class="art-copy"><small> A MOMENT TO KEEP </small><strong>'+(p.media==='two'?'Make room for good things':p.media==='three'?'A little inspiration':'Find your own pace')+'</strong><span>Life lately · HOBO moments</span></div></div></div>':'';
-return '<article class="post" data-post="'+p.id+'"><div class="post-head">'+avatar(p)+'<div class="post-author"><div class="author-line"><strong>'+escapeHTML(p.name)+'</strong>'+(p.verified?'<span class="verified">✦</span>':'')+'<span class="handle">'+escapeHTML(p.handle)+'</span><span class="post-time">· '+escapeHTML(p.time)+'</span></div></div><button class="post-menu" data-post-menu="'+p.id+'" aria-label="Post options">···</button></div><p class="post-text">'+escapeHTML(p.text)+'</p>'+media+'<div class="post-stats"><span>'+p.likes+(p.likes===1?' like':' likes')+'</span><span>'+p.comments+' comments · '+p.reposts+' reposts</span></div><div class="post-actions"><button class="post-action '+(liked?'liked':'')+'" data-like="'+p.id+'"><span class="action-icon">'+(liked?'♥':'♡')+'</span>Like</button><button class="post-action" data-comment="'+p.id+'"><span class="action-icon">◯</span>Comment</button><button class="post-action" data-repost="'+p.id+'"><span class="action-icon">⟳</span>Repost</button><button class="post-action '+(saved?'saved':'')+'" data-save="'+p.id+'" style="margin-left:auto"><span class="action-icon">'+(saved?'◆':'◇')+'</span>Save</button></div></article>';
-}
-function renderFeed(){
-let posts=[...state.posts];
-if(activeFeed==='following')posts=posts.filter(p=>state.following.includes(p.handle)||p.handle==='@you');
-if(activePage==='saved')posts=posts.filter(p=>state.saved.includes(p.id));
-$('feed').innerHTML=posts.length?posts.map(postCard).join(''):'<div style="padding:45px 20px;text-align:center;color:var(--muted);font-size:12px">Nothing here yet. Save a post and it will appear here.</div>';
-}
-function setPage(page){
-activePage=page;
-document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
-const names={home:'Home',explore:'Explore',messages:'Messages',notifications:'Notifications',profile:'Profile',saved:'Bookmarks'};
-$('page-title').textContent=names[page]||'HOBO';
-$('home-view').style.display=page==='home'||page==='saved'?'block':'none';
-$('other-view').style.display=page==='home'||page==='saved'?'none':'block';
-if(page==='saved'){renderFeed();$('home-view').querySelector('.feed-tabs').style.display='none';$('home-view').querySelector('.stories').style.display='none';$('home-view').querySelector('.composer-card').style.display='none';}
-else if(page==='home'){$('home-view').querySelector('.feed-tabs').style.display='flex';$('home-view').querySelector('.stories').style.display='flex';$('home-view').querySelector('.composer-card').style.display='flex';renderFeed();}
-else{
-const content={
-explore:'<div style="padding:25px"><div class="eyebrow">FIND YOUR NEXT FAVOURITE</div><h2 style="font-size:23px;letter-spacing:-.8px">Explore HOBO</h2><p style="color:var(--muted);font-size:12px">Discover conversations, creators and things worth sharing.</p><div class="side-card"><div class="side-heading">Trending topics</div><div class="trend"><small>Technology</small><strong>#BuildInPublic</strong><span>2.4k posts</span></div><div class="trend"><small>Entertainment</small><strong>Weekend watchlist</strong><span>1.8k posts</span></div><div class="trend"><small>Gaming</small><strong>What are you playing?</strong><span>986 posts</span></div></div></div>',
-messages:'<div style="padding:35px 24px;text-align:center"><div style="font-size:35px;color:var(--purple)">▢</div><h2 style="font-size:20px">Your messages</h2><p style="color:var(--muted);font-size:12px;max-width:300px;margin:8px auto">Private conversations will live here. Messaging is planned for a later development stage.</p></div>',
-notifications:'<div style="padding:25px"><h2 style="font-size:20px">Notifications</h2><div class="side-card"><p style="font-size:12px">✦ <strong>Amara</strong> and 12 others liked your kind of content.</p><p style="font-size:12px">＋ <strong>Daniel</strong> started following you.</p><p style="font-size:12px">◯ <strong>Zara</strong> mentioned a topic you might like.</p><p style="font-size:10px;color:var(--muted)">Sample notifications for the preview.</p></div></div>',
-profile:'<div style="padding:25px"><div style="height:100px;border-radius:15px;background:linear-gradient(110deg,#34274c,#87618b,#c18e9a)"></div><div style="display:flex;align-items:end;gap:13px;margin-top:-28px;padding-left:15px">'+avatar({initial:state.initial,tone:'purple'},'')+'<button class="secondary-btn" id="profile-edit-main" style="margin-left:auto">Edit profile</button></div><h2 style="font-size:19px;margin:12px 0 0">'+escapeHTML(state.displayName)+'</h2><div style="font-size:11px;color:var(--muted)">@you</div><p style="font-size:12px;color:var(--soft)">Making a little space for good things.</p><div style="display:flex;gap:18px;font-size:11px;color:var(--muted)"><span><strong style="color:white">0</strong> Following</span><span><strong style="color:white">0</strong> Followers</span></div><div class="side-card"><div class="side-heading">Your posts</div><p style="font-size:11px;color:var(--muted)">Your published posts will appear on your profile.</p></div></div>'
-};
-$('other-view').innerHTML=content[page]||'';const edit=$('profile-edit-main');if(edit)edit.onclick=editProfile;
-}
-}
-function openModal(mode='post',type='text'){
-modalMode=mode;pendingType=type;
-$('modal-title').textContent=mode==='story'?'Add to your story':mode==='edit'?'Edit profile':'Create a post';
-if(mode==='edit'){$('modal-content').innerHTML='<label style="font-size:11px;color:var(--muted)">Display name</label><input class="modal-input" id="profile-name-input" maxlength="28" value="'+escapeHTML(state.displayName)+'"><p>Your profile settings are a preview in this stage.</p>';$('modal-submit').textContent='Save profile';}
-else if(mode==='story'){$('modal-content').innerHTML='<div class="story-view"><span>YOUR STORY · PREVIEW</span><strong>Share a little moment from your day.</strong><span>Stories will be available for 24 hours when publishing is connected.</span></div><p>Story publishing and media upload will be connected in a later stage.</p>';$('modal-submit').textContent='Got it';}
-else{$('modal-content').innerHTML='<textarea class="modal-input" id="modal-post-text" rows="5" maxlength="500" placeholder="What is happening in your world?"></textarea><p>Share a thought, a moment, or something you found interesting.</p>';$('modal-submit').textContent='Publish';setTimeout(()=>$('modal-post-text')?.focus(),50);}
-$('modal-backdrop').classList.add('open');
-}
-function closeModal(){$('modal-backdrop').classList.remove('open')}
-function publish(text){
-text=text.trim();if(!text){toast('Write something before publishing.');return}
-state.posts.unshift({id:Date.now(),name:state.displayName,handle:'@you',initial:state.initial,tone:'purple',time:'Just now',verified:false,text,likes:0,comments:0,reposts:0,following:true});
-save();activeFeed='for-you';document.querySelectorAll('[data-feed]').forEach(b=>b.classList.toggle('active',b.dataset.feed==='for-you'));setPage('home');toast('Your post has been added to this preview.');
-}
-function editProfile(){openModal('edit')}
-document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
-document.querySelectorAll('[data-create]').forEach(b=>b.addEventListener('click',()=>openModal('post')));
-document.querySelectorAll('[data-feed]').forEach(b=>b.addEventListener('click',()=>{activeFeed=b.dataset.feed;document.querySelectorAll('[data-feed]').forEach(x=>x.classList.toggle('active',x===b));renderFeed()}));
-$('quick-publish').addEventListener('click',()=>{publish($('quick-post').value);$('quick-post').value=''});
-$('quick-post').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('quick-publish').click()}});
-$('modal-close').onclick=closeModal;$('modal-cancel').onclick=closeModal;$('modal-backdrop').addEventListener('click',e=>{if(e.target===$('modal-backdrop'))closeModal()});
-$('modal-submit').onclick=()=>{if(modalMode==='edit'){const n=$('profile-name-input').value.trim();if(!n){toast('Please enter a display name.');return}state.displayName=n;state.initial=n[0].toUpperCase();save();$('sidebar-name').textContent=n;$('sidebar-avatar').textContent=state.initial;$('composer-avatar').textContent=state.initial;closeModal();if(activePage==='profile')setPage('profile');toast('Profile preview updated.')}else if(modalMode==='story'){closeModal();toast('Story publishing will be connected in a later stage.')}else{publish($('modal-post-text').value);closeModal()}};
-$('edit-profile').onclick=editProfile;
-$('stories').addEventListener('click',e=>{const b=e.target.closest('[data-story]');if(!b)return;if(b.dataset.story==='Your story')openModal('story');else{modalMode='story';$('modal-title').textContent=b.dataset.story+"'s story";$('modal-content').innerHTML='<div class="story-view"><span>STORY PREVIEW</span><strong>A little moment from '+escapeHTML(b.dataset.story)+'.</strong><span>Stories are temporary updates.</span></div>';$('modal-submit').textContent='Close';$('modal-backdrop').classList.add('open')}});
-$('feed').addEventListener('click',e=>{
-const like=e.target.closest('[data-like]'),saveBtn=e.target.closest('[data-save]'),comment=e.target.closest('[data-comment]'),repost=e.target.closest('[data-repost]'),menu=e.target.closest('[data-post-menu]');
-if(like){const id=Number(like.dataset.like),p=state.posts.find(x=>x.id===id);if(!p)return;if(state.liked.includes(id)){state.liked=state.liked.filter(x=>x!==id);p.likes=Math.max(0,p.likes-1)}else{state.liked.push(id);p.likes++}save();renderFeed()}
-if(saveBtn){const id=Number(saveBtn.dataset.save);state.saved=state.saved.includes(id)?state.saved.filter(x=>x!==id):[...state.saved,id];save();renderFeed();toast(state.saved.includes(id)?'Post bookmarked.':'Bookmark removed.')}
-if(comment)toast('Comments will be connected in the social engine stage.');
-if(repost)toast('Reposting will be added in a later stage.');
-if(menu)toast('Post options and reporting controls are coming in a later stage.');
-});
-document.querySelectorAll('[data-compose-type]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.composeType==='mood'){const t=$('quick-post');t.value+=(t.value?' ':'')+'Feeling good today ✨';t.focus()}else toast('Photo and video uploads will be connected in a later stage.')}));
-document.querySelectorAll('.follow-btn').forEach(b=>b.addEventListener('click',()=>{const handle=b.closest('.person').querySelector('.person-info span').textContent;const is=b.classList.toggle('following');b.textContent=is?'Following':'Follow';if(is)state.following.push(handle);else state.following=state.following.filter(x=>x!==handle);save()}));
-$('top-search').onclick=()=>{setPage('explore');toast('Search and discovery are part of the Explore stage.')};$('desktop-search').addEventListener('keydown',e=>{if(e.key==='Enter'){setPage('explore');toast('Search will be connected in a later stage.')}});$('top-notifications').onclick=()=>setPage('notifications');$('see-trends').onclick=()=>setPage('explore');$('see-people').onclick=()=>setPage('explore');
-$('sidebar-name').textContent=state.displayName;$('sidebar-avatar').textContent=state.initial;$('composer-avatar').textContent=state.initial;
-renderFeed();
-})();
-</script>
+
+<!-- Catch modal -->
+<div class="modal" id="modal-catch" hidden>
+  <div class="sheet">
+    <div id="catch-body"></div>
+    <textarea id="echo-text" maxlength="140" placeholder="send an echo back..."></textarea>
+    <div class="sheet-actions">
+      <button id="catch-close" class="ghost-btn">let it drift</button>
+      <button id="catch-keep">Keep in pouch 🎒</button>
+    </div>
+    <div class="sheet-actions">
+      <button id="echo-send" class="full">Echo ↩</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pouch modal -->
+<div class="modal" id="modal-pouch" hidden>
+  <div class="sheet">
+    <h2>Your pouch</h2>
+    <div id="pouch-list"></div>
+    <div class="sheet-actions">
+      <button id="pouch-close" class="full">close</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/drift-engine.js"></script>
+<script src="js/flares.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

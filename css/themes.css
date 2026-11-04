@@ -1,0 +1,17 @@
+:root {
+  --accent:#ff6b8b; --accent-fg:#1a0d12; --accent-glow:rgba(255,107,139,.4);
+}
+body.theme-night {
+  --bg:#0d0f1a; --fg:#eef0ff; --panel:rgba(30,33,56,.75); --input:#1c1f33;
+  --border:rgba(255,255,255,.12);
+}
+body.theme-day {
+  --bg:#f4f1ea; --fg:#2a2a33; --panel:rgba(255,255,255,.8); --input:#fff;
+  --border:rgba(0,0,0,.12);
+}
+body.theme-dream {
+  --bg:#2b1b4d; --fg:#f6ecff; --panel:rgba(70,40,130,.7); --input:#3a2568;
+  --border:rgba(255,255,255,.16);
+  --accent:#d5b3ff; --accent-fg:#241340; --accent-glow:rgba(213,179,255,.45);
+}
+body { background:var(--bg); color:var(--fg); transition:background .5s; }
