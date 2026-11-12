@@ -1,22 +1,31 @@
-# HOBO
+# Hobo — Drift Social ✳
 
-**Your people. Your space.**
+A social app without a feed. Your posts are **flares** — they drift across a living field, and other people catch them, echo them, or let them pass. No likes. No followers. Just drift.
 
-HOBO is a mobile-friendly community chat app prototype. This first milestone is a front-end demo built with plain HTML, CSS, and JavaScript.
+## What it does
+
+- ✳ **Drop a flare** — a text post, a doodle, or a mood-color burst
+- 🌊 **Drift field** — flares float with gentle physics, wrapping around the world
+- 🎯 **Catch** — tap a drifting flare to open it, keep it in your **pouch**
+- ↩ **Echo** — send a reply back into the drift; echoes draw a visible trace line
+- 🎨 **Themes** — night, day, and dream modes
+- 👻 **Ghost flares** — the field is never empty, even solo
+- 💾 **Zero backend** — everything persists in localStorage
 
 ## Run it
-Open `index.html` in a browser, or enable GitHub Pages for this repository (Settings → Pages → Deploy from a branch → `main` → `/ (root)`).
 
-## Current prototype
-- Responsive dark interface
-- Community and channel navigation
-- Sample chat messages
-- Send messages locally in the current browser session
+Open `index.html` in any browser, or serve with GitHub Pages. No build step, no dependencies.
 
-## Next milestones
-1. Refine the interface and mobile navigation.
-2. Add sign-up, sign-in, and user profiles.
-3. Add persistent message storage and real-time chat.
-4. Add community creation, roles, and moderation.
+## Structure
 
-**Note:** This is currently a visual/front-end prototype. Messages are not yet shared with other users or saved to a server.
+```
+index.html
+css/    style.css, themes.css
+js/     app.js, drift-engine.js, flares.js, storage.js, ui.js
+```
+
+## Roadmap
+
+- QR-share a single flare
+- Real multi-user drift sync
+- Remix flares (doodle on top of a caught flare)
